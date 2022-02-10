@@ -11,7 +11,7 @@ The tool to scrape the data can be found here: [downloader](https://github.com/e
 
 ```
 pip install semeval_8_2022_ia_downloader
-python -m semeval_8_2022_ia_downloader.cli --links_file=<train/eval data file> --dump_dir=<desired dir name>
+python -m semeval_8_2022_ia_downloader.cli --links_file=<train/eval data> --dump_dir=<desired dir>
 ```
 
 A `.html` and a `.json` file will be downloaded of the individual articles. The first will contain the website with the article, the second some additional data. The articles are grouped in a folder according ot their last two digits. For example, a the folter `train_data/10/` would contain the `.html` and `.json` files for the file `9876543210`, from the given pair `0123456789_9876543210`. The script will generate a `.csv` file of the articles it couldn't download. 
