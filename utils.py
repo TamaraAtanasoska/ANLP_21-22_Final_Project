@@ -48,5 +48,6 @@ def package_data(pair_data_path: str, scraped_data_path: str) -> pd.DataFrame:
     mdf = pd.merge(mdf, tdf, how='left', left_on=['id2'], right_on=['id'])
     mdf.rename(columns={'text':'id2_text', 'title':'id2_title'}, inplace=True)
     mdf.drop(columns=['id', 'id2'], inplace=True)
-
+    
+    mdf.dropna(inplace=True) #drop pairs with missing articles
     return mdf
