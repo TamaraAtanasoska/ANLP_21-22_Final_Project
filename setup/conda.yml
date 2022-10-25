@@ -1,0 +1,4 @@
+name: SemEval22
+channels:
+  - defaults
+prefix: /Users/tamara/opt/miniconda3/envs/SemEval22
