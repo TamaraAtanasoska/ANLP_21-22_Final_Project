@@ -3,7 +3,6 @@ import json
 import os
 
 from collections import defaultdict
-from os import path
 
 import pandas as pd
 
@@ -18,7 +17,7 @@ def prepare_texts(base_path: str) -> pd.DataFrame:
     d = defaultdict(list)
     texts = []
 
-    for file in glob.iglob(path.join(base_path, '*/*.json'), recursive=True):
+    for file in glob.iglob(os.path.join(base_path, '*/*.json'), recursive=True):
         jdict = json.load(open(file))
         texts.append([(os.path.splitext(os.path.basename(file))[0]), \
                        jdict['title'], jdict['text']])
