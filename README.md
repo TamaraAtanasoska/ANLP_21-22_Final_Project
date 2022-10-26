@@ -18,7 +18,14 @@ In the folder ```setup/``` you can find the respective environment replication a
 
 ## Data
 
-The competition could not provide the raw article text because of copyright reasons, so a tool was developed and made available to scrape the articles for every participant individually. I have uploaded the train and evaluation data documents that contain the links to the article pairs as given in the [data folder](data/). I attempted to scrape the data during the first week of February 2022, and there were already quite a few inaccessible articles from the train data. As a strategy against this, one can just omit the pairs with the missing data during training/evaluation, and the code I provide does this already. I was lucky to obtain the scraped data from an earlier point in time by a kind competition participant, so the number of pairs missing for me was marginal. I am currently not sure about the copyright issues and if I am allowed to push the whole data in this repo, and to stay on the safe side I will just link to the way to scrape them individually. 
+The competition could not provide the raw article text because of copyright
+reasons, so a tool was developed and made available to scrape the articles for
+every participant individually. I have uploaded the train and evaluation data
+documents that contain the links to the article pairs as given in the [data
+folder](data/). I attempted to scrape the data during the first week of February
+2022, and there were already quite a few inaccessible articles from the train
+data. As a strategy against this, I omit the pairs with the missing data during
+training/evaluation([check here](src/utils/process_data.py#L51)). I was lucky to obtain the scraped data from an earlier point in time by a kind competition participant, so the number of pairs missing for me was marginal. 
 
 The tool to scrape the data can be found here: [downloader](https://github.com/euagendas/semeval_8_2022_ia_downloader). It can be used like this: 
 
