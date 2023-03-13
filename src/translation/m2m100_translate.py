@@ -1,12 +1,15 @@
-from transformers import AutoTokenizer, M2M100ForConditionalGeneration
 import pandas as pd
+
+from transformers import AutoTokenizer, M2M100ForConditionalGeneration
+from utils import package_data
+
 
 model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_418M")
 tokenizer = AutoTokenizer.from_pretrained("facebook/m2m100_418M")
 
 # create a dataframe from all train data
 mdf_train = package_data(
-    "data/semeval-2022_task8_train-data_batch_2.csv", "data/train_data"
+    "../../data/semeval-2022_task8_train-data_batch_2.csv", "../../data/train_data"
 )
 
 # create separate chunks for easier traslation and monitoring
