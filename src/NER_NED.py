@@ -7,6 +7,7 @@ from sentence_transformers import SentenceTransformer, util
 nlp_model_en = spacy.load("en_core_web_sm")
 nlp_model_en.add_pipe("entityfishing")
 nlp = spacy.load("en_core_web_lg")
+model = SentenceTransformer('sentence-transformers/paraphrase-MiniLM-L12-v2')
 
 
 def NER_and_NED(df):
