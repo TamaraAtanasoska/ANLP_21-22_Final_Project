@@ -36,8 +36,8 @@ def summarize(df):
     df["id1_text"] = "summarize:" + df.id1_text
     df["id2_text"] = "summarize:" + df.id2_text
 
-    df["id1_text_summary"] = process_data[df["id1_text"].tolist()]
-    df["id2_text_summary"] = process_data[df["id2_text"].tolist()]
+    df["id1_text_summary"] = process_data(df["id1_text"].tolist())
+    df["id2_text_summary"] = process_data(df["id2_text"].tolist())
 
     df["id1_text"] = df["id1_text"].apply(lambda x: x.replace("summarize:", ""))
     df["id2_text"] = df["id1_text"].apply(lambda x: x.replace("summarize:", ""))
