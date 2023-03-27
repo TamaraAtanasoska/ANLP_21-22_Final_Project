@@ -1,3 +1,6 @@
+# code directly transfered from notebook withtout much refactoring
+# used as a reference for the effort as it wasn't used for the project at the end
+
 import httpx
 import numpy as np
 import time
