@@ -1,4 +1,4 @@
-name: SemEval22
+name: ANLPFinal
 channels:
   - defaults
-prefix: /Users/tamara/opt/miniconda3/envs/SemEval22
+prefix: /Users/tamara/opt/miniconda3/envs/ANLPFinal
