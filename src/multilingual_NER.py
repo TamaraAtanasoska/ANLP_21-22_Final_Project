@@ -16,7 +16,7 @@ def process_data(column):
     return output
 
 
-def summarize(df):
+def recognise_named_entities_multilingual(df):
     """
     This function takes a dataframe and finds the named entities for the two
     relevant columns.
