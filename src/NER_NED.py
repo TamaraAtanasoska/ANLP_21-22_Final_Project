@@ -36,7 +36,7 @@ def NER_and_NED(df):
     return df
 
 
-def divide_named_entitites_in_two_types(column):
+def divide_named_entitites_in_two_types(column, repetition=True):
     """
     This function divides the named entities into two lists. One containes all
     the named entities that belong to the categories of geo-political entities,
@@ -52,8 +52,12 @@ def divide_named_entitites_in_two_types(column):
         tuples = ast.literal_eval(row)
         tags_ent = [list(t)[0] for t in tuples if list(t)[1] in tags_list]
         rest_ent = [list(t)[0] for t in tuples if list(t)[1] not in tags_list]
-        gpe_loc_date_time.append(" ".join(list(set(tags_ent))))
-        rest.append(" ".join(list(set(rest_ent))))
+        if not repetition: 
+            gpe_loc_date_time.append(" ".join(list(set(tags_ent))))
+            rest.append(" ".join(list(set(rest_ent))))
+        else:
+            gpe_loc_date_time.append(" ".join(tags_ent))
+            rest.append(" ".join(rest_ent))
     return (gpe_loc_date_time, rest)
 
 
