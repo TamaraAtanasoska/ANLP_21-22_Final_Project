@@ -71,7 +71,7 @@ def sbert_embeddings_similarity(texts: list) -> list:
     for num, i in enumerate(text_1):
         scores.append(
             util.cos_sim(
-                ast.literal_eval(text_1[num]), ast.literal_eval(text_2[num]).item()
-            )
+                ast.literal_eval(text_1[num]), ast.literal_eval(text_2[num])
+            ).item()
         )
     return scores
