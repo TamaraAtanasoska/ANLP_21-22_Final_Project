@@ -1,11 +1,11 @@
 import glob
 import json
 import os
+import pandas as pd
 
 from collections import defaultdict
 from os import path
-
-import pandas as pd
+from sentence_transformers import util
 
 
 def prepare_texts(base_path: str) -> pd.DataFrame:
@@ -55,3 +55,18 @@ def package_data(pair_data_path: str, scraped_data_path: str) -> pd.DataFrame:
 
     mdf.dropna(inplace=True)  # drop pairs with missing articles
     return mdf
+
+
+def sbert_embeddings_similarity(texts: list) -> list:
+    """
+    This function is assessing the similarity between two chunks of text
+    encoded with SBERT embeddings. It takes the encodings in a form of a
+    list and compares each element-wise. The result is the similarity between
+    each pair of articles.
+    """
+    scores = []
+    text_1 = texts[0]
+    text_2 = texts[1]
+    for num, i in enumerate(text_1):
+        scores.append(util.cos_sim(text_1[num], text_2[num]).item())
+    return scores
