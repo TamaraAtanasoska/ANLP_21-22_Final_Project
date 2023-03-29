@@ -1,3 +1,4 @@
+import ast
 import glob
 import json
 import os
@@ -68,5 +69,9 @@ def sbert_embeddings_similarity(texts: list) -> list:
     text_1 = texts[0].tolist()
     text_2 = texts[1].tolist()
     for num, i in enumerate(text_1):
-        scores.append(util.cos_sim(text_1[num], text_2[num]).item())
+        scores.append(
+            util.cos_sim(
+                ast.literal_eval(text_1[num]), ast.literal_eval(text_2[num]).item()
+            )
+        )
     return scores
