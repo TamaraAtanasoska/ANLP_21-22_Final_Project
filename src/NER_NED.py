@@ -1,4 +1,3 @@
-import ast
 import spacy
 
 from sentence_transformers import SentenceTransformer, util
@@ -7,6 +6,7 @@ from sentence_transformers import SentenceTransformer, util
 nlp_model_en = spacy.load("en_core_web_sm")
 nlp_model_en.add_pipe("entityfishing")
 nlp = spacy.load("en_core_web_lg")
+model = SentenceTransformer("sentence-transformers/paraphrase-MiniLM-L12-v2")
 
 
 def NER_and_NED(df):
@@ -36,7 +36,7 @@ def NER_and_NED(df):
     return df
 
 
-def divide_named_entitites_in_two_types(column):
+def divide_named_entitites_in_two_types(column, repetition=True):
     """
     This function divides the named entities into two lists. One containes all
     the named entities that belong to the categories of geo-political entities,
@@ -49,11 +49,14 @@ def divide_named_entitites_in_two_types(column):
     gpe_loc_date_time = []
     rest = []
     for row in ner_list:
-        tuples = ast.literal_eval(row)
-        tags_ent = [list(t)[0] for t in tuples if list(t)[1] in tags_list]
-        rest_ent = [list(t)[0] for t in tuples if list(t)[1] not in tags_list]
-        gpe_loc_date_time.append(" ".join(list(set(tags_ent))))
-        rest.append(" ".join(list(set(rest_ent))))
+        tags_ent = [list(t)[0] for t in eval(row) if list(t)[1] in tags_list]
+        rest_ent = [list(t)[0] for t in eval(row) if list(t)[1] not in tags_list]
+        if not repetition:
+            gpe_loc_date_time.append(" ".join(list(set(tags_ent))))
+            rest.append(" ".join(list(set(rest_ent))))
+        else:
+            gpe_loc_date_time.append(" ".join(tags_ent))
+            rest.append(" ".join(rest_ent))
     return (gpe_loc_date_time, rest)
 
 
@@ -65,8 +68,7 @@ def transform_named_entities_into_a_big_sentence(column):
     """
     transformed_ner = []
     for row in column:
-        tuples = ast.literal_eval(row)
-        list_ent = [list(t)[0] for t in tuples]
+        list_ent = [list(t)[0] for t in row]
         transformed_ner.append(" ".join(list_ent))
     return transformed_ner
 
@@ -89,8 +91,7 @@ def transform_named_entities_to_a_sentence_and_spacy_doc(column):
     """
     transformed_ner = []
     for row in column:
-        tuples = ast.literal_eval(row)
-        list_ent = [list(t)[0] for t in tuples]
+        list_ent = [list(t)[0] for t in row]
         transformed_ner.append(nlp(" ".join(list_ent)))
     return transformed_ner
 
@@ -112,8 +113,7 @@ def get_text_label_and_wiki_identifier_named_entities(column):
     """
     transformed_ner = []
     for row in column:
-        tuples = ast.literal_eval(row)
-        list_ent = [list(t)[:3] for t in tuples]
+        list_ent = [list(t)[:3] for t in row]
         clean_lst = [[l for l in lst if l is not None] for lst in list_ent]
         sentences = [" ".join(l) for l in clean_lst]
         one_doc = ". ".join(sentences)

@@ -1,11 +1,13 @@
 import glob
 import json
 import os
+import pandas as pd
+import torch
 
 from collections import defaultdict
 from os import path
-
-import pandas as pd
+from sentence_transformers import util
+from torch import tensor
 
 
 def prepare_texts(base_path: str) -> pd.DataFrame:
@@ -55,3 +57,21 @@ def package_data(pair_data_path: str, scraped_data_path: str) -> pd.DataFrame:
 
     mdf.dropna(inplace=True)  # drop pairs with missing articles
     return mdf
+
+
+def sbert_embeddings_similarity(texts: list) -> list:
+    """
+    This function is assessing the similarity between two chunks of text
+    encoded with SBERT embeddings. It takes the encodings in a form of a
+    list and compares each element-wise. The result is the similarity between
+    each pair of articles.
+    """
+    scores = []
+    text_1 = texts[0]
+    text_2 = texts[1]
+    for num, i in enumerate(text_1):
+        if not torch.is_tensor(text_1[num]):
+            scores.append(util.cos_sim(eval(text_1[num]), eval(text_2[num])).item())
+        else:
+            scores.append(util.cos_sim(text_1[num], text_2[num]).item())
+    return scores
