@@ -2,6 +2,7 @@ import glob
 import json
 import os
 import pandas as pd
+import torch
 
 from collections import defaultdict
 from os import path
