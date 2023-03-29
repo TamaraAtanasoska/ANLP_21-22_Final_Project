@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer, util
 nlp_model_en = spacy.load("en_core_web_sm")
 nlp_model_en.add_pipe("entityfishing")
 nlp = spacy.load("en_core_web_lg")
-model = SentenceTransformer('sentence-transformers/paraphrase-MiniLM-L12-v2')
+model = SentenceTransformer("sentence-transformers/paraphrase-MiniLM-L12-v2")
 
 
 def NER_and_NED(df):
@@ -49,9 +49,9 @@ def divide_named_entitites_in_two_types(column, repetition=True):
     gpe_loc_date_time = []
     rest = []
     for row in ner_list:
-        tags_ent = [list(t)[0] for t in row if list(t)[1] in tags_list]
-        rest_ent = [list(t)[0] for t in row if list(t)[1] not in tags_list]
-        if not repetition: 
+        tags_ent = [list(t)[0] for t in eval(row) if list(t)[1] in tags_list]
+        rest_ent = [list(t)[0] for t in eval(row) if list(t)[1] not in tags_list]
+        if not repetition:
             gpe_loc_date_time.append(" ".join(list(set(tags_ent))))
             rest.append(" ".join(list(set(rest_ent))))
         else:
