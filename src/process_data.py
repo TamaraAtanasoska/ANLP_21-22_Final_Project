@@ -2,11 +2,11 @@ import glob
 import json
 import os
 import pandas as pd
-import torch.tensor as tensor
 
 from collections import defaultdict
 from os import path
 from sentence_transformers import util
+from torch import tensor
 
 
 def prepare_texts(base_path: str) -> pd.DataFrame:
