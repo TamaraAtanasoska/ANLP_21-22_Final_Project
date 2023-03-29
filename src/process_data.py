@@ -65,8 +65,8 @@ def sbert_embeddings_similarity(texts: list) -> list:
     each pair of articles.
     """
     scores = []
-    text_1 = texts[0]
-    text_2 = texts[1]
+    text_1 = texts[0].tolist()
+    text_2 = texts[1].tolist()
     for num, i in enumerate(text_1):
         scores.append(util.cos_sim(text_1[num], text_2[num]).item())
     return scores
