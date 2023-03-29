@@ -69,5 +69,8 @@ def sbert_embeddings_similarity(texts: list) -> list:
     text_1 = texts[0]
     text_2 = texts[1]
     for num, i in enumerate(text_1):
-        scores.append(util.cos_sim(eval(text_1[num]), eval(text_2[num])).item())
+        if not isintance(text_1[num], tensor):
+            scores.append(util.cos_sim(eval(text_1[num]), eval(text_2[num])).item())
+        else:
+            scores.append(util.cos_sim(text_1[num], text_2[num]).item())
     return scores
