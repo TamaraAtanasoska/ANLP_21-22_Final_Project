@@ -4,7 +4,7 @@
 import pandas as pd
 
 from transformers import AutoTokenizer, M2M100ForConditionalGeneration
-from utils import package_data
+from ..process_data import package_data
 
 
 model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_418M")

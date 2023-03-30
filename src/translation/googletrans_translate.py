@@ -8,7 +8,7 @@ import textwrap
 import socket
 
 from googletrans import Translator
-from utils import package_data
+from ..process_data import package_data
 
 
 # attempt to fix a service timeout error
