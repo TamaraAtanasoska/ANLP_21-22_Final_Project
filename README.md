@@ -5,22 +5,11 @@ The end report/paper for the project can also be found in the repo (not yet subm
 
 ### Environment recreation 
 
-In the folder ```setup/``` you can find the respective environment replication and package requirements files. There are two options:
-
-1. You can run ```pip install -r setup/requirements.txt``` to install the necessary packages in your existing environment.
-
-2. If you are using [conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) to manage your virtual environments, you can replicate and activate the full exact environment with the following commands:
-
-   ```
-   conda env create --name <name> --file setup/conda.yml
-   conda activate <name>
-   ```
+Run ```pip install -r setup/requirements.txt``` to install the necessary packages in your existing environment.
 
 ## Data
 
-The competition could not provide the raw article text because of copyright reasons, so a tool was developed and made available to scrape the articles for every participant individually. I have uploaded the train and evaluation data documents that contain the links to the article pairs as given in the [data folder](data/). I attempted to scrape the data during the first week of February 2022, and there were already quite a few inaccessible articles from the train data. As a strategy against this, one can just omit the pairs with the missing data during training/evaluation, and the code I provide does this already. I was lucky to obtain the scraped data from an earlier point in time by a kind competition participant, so the number of pairs missing for me was marginal. I am currently not sure about the copyright issues and if I am allowed to push the whole data in this repo, and to stay on the safe side I will just link to the way to scrape them individually. 
-
-The tool to scrape the data can be found here: [downloader](https://github.com/euagendas/semeval_8_2022_ia_downloader). It can be used like this: 
+As with all data of this kind, the it must be individually scraped because of copyright reasons. The competition provided files that contained links and a a tool to download the data. The tool to scrape the data can be found here: [downloader](https://github.com/euagendas/semeval_8_2022_ia_downloader). It can be used like this: 
 
 ```
 pip install semeval_8_2022_ia_downloader
@@ -31,7 +20,10 @@ A `.html` and a `.json` file will be downloaded of the individual articles. The 
 
 More details about the data are found on the [competition website](https://competitions.codalab.org/competitions/33835#learn_the_details-timetable). 
 
+## API documentation
 
+This repository contains an API that is used to explore the simplicity-performance trade-offs when it comes to finding similarity between two articles. The collected documentation for the API can be [accessed here](https://tamaraatanasoska.github.io/SemEval-2022-Task-8-Multilingual-News-Article-Similarity/). It shows a hirearchy of methods and collected docstrings.
 
+## Usage
 
-
+[This notebook](https://colab.research.google.com/drive/1k-2Pq858ADX6-A1j1oWpCIRPHs3zmj9K?usp=sharing) goes over all the API modular parts and shows how each of methods like summarisation, named entity recognition and disambiguation, similairty measurements and the encoding with different emebddings can be used in detail. The notebook starts with cloning the repository and recreating the environment and continues into neatly divided sections for each method. 
